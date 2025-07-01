@@ -17,6 +17,7 @@ import { useState } from "react";
 import { Switch } from "../ui/switch";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { serverUrl } from "@/config/config";
 
 interface Props {
   category: CategoryType;
@@ -32,7 +33,7 @@ const CategoryUpdate = ({ category, onUpdate }: Props) => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:8000/api/category/update/${category?._id}`,
+        `${serverUrl}/api/category/update/${category?._id}`,
         {
           name,
           isActive,

@@ -15,6 +15,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { serverUrl } from "@/config/config";
 
 const CreateCategories = () => {
   const [name, setName] = useState("");
@@ -25,13 +26,10 @@ const CreateCategories = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(
-        "http://localhost:8000/api/category/categories",
-        {
-          name,
-          isActive,
-        }
-      );
+      const res = await axios.post(`${serverUrl}/api/category/categories`, {
+        name,
+        isActive,
+      });
       const data = res?.data;
       if (data?.success) {
         router.push("/categories/category-list");

@@ -42,11 +42,11 @@ const LoginPage = () => {
       );
       const data = response?.data;
       const token = response?.data?.token;
-      console.log(data);
-
       if (data?.success) {
         setCookie("token", token, {
-          maxAge: 60 * 60 * 24 * 1,
+          httpOnly: true,
+          sameSite: "none",
+          maxAge: 60 * 60 * 24 * 10,
           path: "/",
         });
         toast.success(data?.message);

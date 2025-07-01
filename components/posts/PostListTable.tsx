@@ -28,6 +28,7 @@ import {
 import { Button } from "../ui/button";
 import { Loader2, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { serverUrl } from "@/config/config";
 
 const PostListTable = () => {
   const [loading, setLoading] = useState(false);
@@ -54,7 +55,7 @@ const PostListTable = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `http://localhost:8000/api/post/deletePost/${_id}`,
+        `${serverUrl}/api/post/deletePost/${_id}`,
         {},
         {
           withCredentials: true,

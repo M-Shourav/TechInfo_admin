@@ -13,7 +13,6 @@ import {
   UserRoundPen,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -99,7 +98,7 @@ export default function Home() {
         <>
           <div
             className="w-full grid grid-cols-1 md:grid-cols-2 
-    lg:grid-cols-4 gap-3"
+            lg:grid-cols-4 gap-3"
           >
             <Link href={"/blogpost/post-list"}>
               <DashboardCard

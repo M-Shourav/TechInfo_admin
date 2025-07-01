@@ -31,6 +31,7 @@ import {
 import { Button } from "../ui/button";
 import { Loader2, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { serverUrl } from "@/config/config";
 
 const GetAllAuthor = () => {
   const [authorList, setAuthorList] = useState([]);
@@ -40,12 +41,9 @@ const GetAllAuthor = () => {
   const getAuthorList = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        "http://localhost:8000/api/admin/AlAuthors",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${serverUrl}/api/admin/AlAuthors`, {
+        withCredentials: true,
+      });
       const data = response?.data;
       if (data?.success) {
         setAuthorList(data?.author);
@@ -61,7 +59,7 @@ const GetAllAuthor = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `http://localhost:8000/api/admin/deleteAuhtor/${_id}`,
+        `${serverUrl}/api/admin/deleteAuhtor/${_id}`,
         {},
         {
           withCredentials: true,

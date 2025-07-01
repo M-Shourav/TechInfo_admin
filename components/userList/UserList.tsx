@@ -23,8 +23,6 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
 import { User } from "@/types/user";
 import UpdateUser from "../UpdateUser";
 import { serverUrl } from "@/config/config";
@@ -32,7 +30,6 @@ import { serverUrl } from "@/config/config";
 const UserList = () => {
   const [userList, setUserList] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const getUserList = async () => {
     setLoading(true);
@@ -63,12 +60,9 @@ const UserList = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/user/remove",
-        {
-          _id,
-        }
-      );
+      const response = await axios.post(`${serverUrl}user/remove`, {
+        _id,
+      });
       const data = response?.data;
       if (data?.success) {
         toast.success(data?.message);

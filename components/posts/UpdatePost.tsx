@@ -1,4 +1,4 @@
-import { Author } from "@/types/author";
+"use client";
 import React, { useState } from "react";
 import {
   Dialog,
@@ -16,6 +16,7 @@ import { Input } from "../ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { PostType } from "@/types/post";
+import { serverUrl } from "@/config/config";
 interface Props {
   post: PostType;
   onUpdate: () => void;
@@ -30,7 +31,7 @@ const UpdatePost = ({ post, onUpdate }: Props) => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/post/updatePost/${post?._id}`,
+        `${serverUrl}/api/post/updatePost/${post?._id}`,
         {
           title,
           summary,

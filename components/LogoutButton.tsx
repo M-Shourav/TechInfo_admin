@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { DropdownMenuItem } from "./ui/dropdown-menu";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { serverUrl } from "@/config/config";
 
 const LogoutButton = () => {
   const router = useRouter();
@@ -15,7 +14,7 @@ const LogoutButton = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/user/logout",
+        `${serverUrl}/api/user/logout`,
         {},
         {
           withCredentials: true,
@@ -34,7 +33,7 @@ const LogoutButton = () => {
     }
   };
   return (
-    <DropdownMenuItem>
+    <DropdownMenuItem disabled={loading}>
       <span className="cursor-pointer" onClick={handleLogout}>
         Logout
       </span>

@@ -1,1 +1,1 @@
-export const serverUrl = "http://localhost:8000/api/";
+export const serverUrl = process.env.NEXT_PUBLIC_API_UR;

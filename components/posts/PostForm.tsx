@@ -22,6 +22,7 @@ import RichTextEditor from "../rich-text-editor";
 import { JSONContent } from "@tiptap/react";
 import { useRouter } from "next/navigation";
 import { Switch } from "../ui/switch";
+import { serverUrl } from "@/config/config";
 
 type SelectOption = {
   value: string;
@@ -52,12 +53,9 @@ const PostForm = () => {
       try {
         setLoading(true);
 
-        const res = await axios.get(
-          "http://localhost:8000/api/admin/AlAuthors",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get(`${serverUrl}/api/admin/AlAuthors`, {
+          withCredentials: true,
+        });
         const data = res?.data;
         if (data?.success) {
           setAuthors(data?.author);
@@ -72,12 +70,9 @@ const PostForm = () => {
     const getCategories = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:8000/api/category/getCategories",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get(`${serverUrl}/api/category/getCategories`, {
+          withCredentials: true,
+        });
         const data = res?.data;
         if (data?.success) {
           setCategoriesList(data?.categories);
@@ -127,7 +122,7 @@ const PostForm = () => {
       });
 
       const res = await axios.post(
-        "http://localhost:8000/api/post/create-post",
+        `${serverUrl}/api/post/create-post`,
         formData,
         {
           headers: {

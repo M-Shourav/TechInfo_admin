@@ -16,6 +16,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { serverUrl } from "@/config/config";
 interface Props {
   author: Author;
   onUpdate: () => void;
@@ -40,7 +41,7 @@ const UpdateAuthor = ({ author, onUpdate }: Props) => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/admin/updateAuthor/${author?._id}`,
+        `${serverUrl}/api/admin/updateAuthor/${author?._id}`,
         {
           name,
           email,

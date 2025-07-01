@@ -18,6 +18,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
+import { serverUrl } from "@/config/config";
 
 const AuthorForm = () => {
   const [loading, setLoading] = useState(false);
@@ -47,13 +48,9 @@ const AuthorForm = () => {
       if (coverImage) {
         formData.append("coverImage", coverImage);
       }
-      const res = await axios.post(
-        "http://localhost:8000/api/admin/author",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${serverUrl}/api/admin/author`, formData, {
+        withCredentials: true,
+      });
       const data = res?.data;
       if (data?.success) {
         toast.success(data?.message);

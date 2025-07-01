@@ -10,19 +10,17 @@ import {
   CommandShortcut,
 } from "./ui/command";
 import {
-  Calculator,
-  Calendar,
+  ChartColumnStacked,
   CreditCard,
   LayoutDashboard,
   Newspaper,
   Settings,
-  Smile,
+  Sparkles,
   User,
-  Wand,
+  UserPen,
 } from "lucide-react";
 import Link from "next/link";
-import { MdAutoFixHigh, MdCategory, MdDashboard } from "react-icons/md";
-import { PiUserListBold } from "react-icons/pi";
+import { MdAutoFixHigh } from "react-icons/md";
 
 const Sidebar = () => {
   return (
@@ -36,7 +34,7 @@ const Sidebar = () => {
               href={"/"}
               className="inline-flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
-              <MdDashboard className="text-black" />
+              <LayoutDashboard />
               Dashboard
             </Link>
           </CommandItem>
@@ -45,7 +43,7 @@ const Sidebar = () => {
               href={"/blogpost"}
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
-              <Newspaper className="text-black" />
+              <Newspaper />
               Post
             </Link>
           </CommandItem>
@@ -54,8 +52,17 @@ const Sidebar = () => {
               href={"/author"}
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
-              <MdAutoFixHigh className="text-black" />
+              <MdAutoFixHigh />
               Author
+            </Link>
+          </CommandItem>
+          <CommandItem className="text-base">
+            <Link
+              href={"/admin"}
+              className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
+            >
+              <Sparkles />
+              Admin
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -63,7 +70,7 @@ const Sidebar = () => {
               href={"/categories"}
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
-              <MdCategory className="text-black" />
+              <ChartColumnStacked />
               Categories
             </Link>
           </CommandItem>
@@ -72,7 +79,7 @@ const Sidebar = () => {
               href={"/user"}
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
-              <PiUserListBold className="text-black" />
+              <UserPen />
               Users
             </Link>
           </CommandItem>
