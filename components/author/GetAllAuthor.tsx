@@ -11,11 +11,8 @@ import {
   TableRow,
 } from "../ui/table";
 import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
-
 import { Author } from "@/types/author";
 import Image from "next/image";
-
 import UpdateAuthor from "./UpdateAuthor";
 import {
   AlertDialog,
@@ -83,10 +80,6 @@ const GetAllAuthor = () => {
   };
 
   useEffect(() => {
-    const token = getCookie("token");
-    if (!token) {
-      return router.push("/auth");
-    }
     getAuthorList();
   }, []);
 
