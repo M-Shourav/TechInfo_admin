@@ -44,14 +44,7 @@ const LoginPage = () => {
         }
       );
       const data = response?.data;
-      const token = response?.data?.token;
       if (data?.success) {
-        setCookie("token", token, {
-          httpOnly: true,
-          sameSite: "none",
-          maxAge: 60 * 60 * 24 * 10,
-          path: "/",
-        });
         toast.success(data?.message);
         window.location.href = "/";
       } else {
@@ -63,12 +56,6 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    const token = getCookie("token");
-    if (token) {
-      router.push("/");
-    }
-  }, [router]);
   return (
     <div className="w-full max-w-md mx-auto">
       <Tabs defaultValue="account" className="w-[400px]">
