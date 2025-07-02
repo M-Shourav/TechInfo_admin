@@ -10,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { useRouter } from "next/navigation";
 import { Author } from "@/types/author";
 import Image from "next/image";
 import UpdateAuthor from "./UpdateAuthor";
@@ -33,8 +32,6 @@ import { serverUrl } from "@/config/config";
 const GetAllAuthor = () => {
   const [authorList, setAuthorList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
   const getAuthorList = async () => {
     try {
       setLoading(true);
