@@ -31,7 +31,7 @@ const LoginPage = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        `${serverUrl}/secure/admin/login`,
+        `${serverUrl}/api/secure/admin/login`,
         {
           email,
           password,
