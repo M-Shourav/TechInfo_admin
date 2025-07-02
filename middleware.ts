@@ -5,19 +5,16 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const pathname = request.nextUrl.pathname;
 
-  // Routes only for guests (login/signup page)
-  const guestRoutes = ["/auth", "/auth/login", "/auth/signup"];
-  const publicRoutes = ["/", "/about", "/contact"]; // add others if needed
+  // guest routes যেখানে লগইন না থাকা ইউজার যেতে পারবে
+  const guestRoutes = ["/auth", "/auth/signup"];
 
-  // If user is already logged in, redirect away from login/signup
+  // ইউজার লগইন থাকলে guest রাউটে যাওয়া নিষেধ (redirect to home)
   if (guestRoutes.includes(pathname) && token) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // If user is NOT logged in, and trying to access secure route
-  const isPublic =
-    publicRoutes.includes(pathname) || pathname.startsWith("/auth");
-  if (!token && !isPublic) {
+  // ইউজার লগইন না থাকলে guest রাউট ছাড়া অন্য জায়গায় যাওয়া নিষেধ (redirect to /auth)
+  if (!token && !guestRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/auth", request.url));
   }
 

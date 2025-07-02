@@ -3,9 +3,9 @@ import AnalyticsChart from "@/components/AnalyticsChart";
 import DashboardCard from "@/components/dashboard/DashboardCard";
 import Loading from "@/components/Loading";
 import PostTable from "@/components/posts/PostTable";
+import { serverUrl } from "@/config/config";
 import { PostType } from "@/types/post";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 import {
   ChartColumnStacked,
   MessageCircle,
@@ -26,7 +26,7 @@ export default function Home() {
     const getUserList = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:8000/api/user/users", {
+        const res = await axios.get(`${serverUrl}/api/user/users`, {
           withCredentials: true,
         });
         setTotalUser(res?.data?.total);
@@ -40,12 +40,9 @@ export default function Home() {
     const getCategories = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:8000/api/category/getCategories",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get(`${serverUrl}/api/category/getCategories`, {
+          withCredentials: true,
+        });
         setTotal(res?.data?.total);
       } catch (error) {
         console.error("Categories getting error:", error);
@@ -56,12 +53,9 @@ export default function Home() {
     const getAuthorList = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:8000/api/admin/AlAuthors",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get(`${serverUrl}/api/admin/AlAuthors`, {
+          withCredentials: true,
+        });
         setTotalAuthor(res?.data?.total);
       } catch (error) {
         console.error("userList getting error:", error);
@@ -73,7 +67,7 @@ export default function Home() {
     const getAllPost = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:8000/api/post/posts", {
+        const res = await axios.get(`${serverUrl}/api/post/posts`, {
           withCredentials: true,
         });
         setPostList(res?.data.post);

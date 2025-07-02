@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -37,7 +36,7 @@ const PostListTable = () => {
   const getPostList = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/post/posts", {
+      const response = await axios.get(`${serverUrl}/api/post/posts`, {
         withCredentials: true,
       });
       const data = response?.data;

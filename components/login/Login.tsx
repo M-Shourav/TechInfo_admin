@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Tabs, TabsContent } from "../ui/tabs";
 import {
   Card,
@@ -13,14 +13,11 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { EyeIcon, EyeOff, LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { getCookie, setCookie } from "cookies-next";
 import Link from "next/link";
 import { serverUrl } from "@/config/config";
 const LoginPage = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

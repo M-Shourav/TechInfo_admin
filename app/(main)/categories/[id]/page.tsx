@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { serverUrl } from "@/config/config";
 import { CategoryType } from "@/types/categories";
 import axios from "axios";
 import { Loader2, Trash2 } from "lucide-react";
@@ -34,12 +35,9 @@ const CategoryListPage = () => {
   const getCategoriesList = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(
-        "http://localhost:8000/api/category/getCategories",
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${serverUrl}/api/category/getCategories`, {
+        withCredentials: true,
+      });
       const data = res.data;
       if (data?.success) {
         setCategoryList(data?.categories);
@@ -58,7 +56,7 @@ const CategoryListPage = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `http://localhost:8000/api/category/delete/${_id}`,
+        `${serverUrl}/api/category/delete/${_id}`,
         {},
         {
           withCredentials: true,

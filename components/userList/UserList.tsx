@@ -34,7 +34,7 @@ const UserList = () => {
   const getUserList = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${serverUrl}user/users`, {
+      const response = await axios.get(`${serverUrl}/api/user/users`, {
         withCredentials: true,
       });
       const data = response?.data;
@@ -60,9 +60,13 @@ const UserList = () => {
       return;
     }
     try {
-      const response = await axios.post(`${serverUrl}user/remove`, {
-        _id,
-      });
+      const response = await axios.post(
+        `${serverUrl}/api/user/remove/${_id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       const data = response?.data;
       if (data?.success) {
         toast.success(data?.message);

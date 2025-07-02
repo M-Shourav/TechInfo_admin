@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ThemToggler from "./ThemToggler";
-import UserInfo from "./UserInfo";
 import LogoutButton from "./LogoutButton";
 import { useRouter } from "next/navigation";
 import { AdminType } from "@/types/adminType";
@@ -27,7 +26,7 @@ const Navbar = () => {
     const fetchAdminData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${serverUrl}secure/admin/me`, {
+        const res = await axios.get(`${serverUrl}/api/secure/admin/me`, {
           withCredentials: true,
         });
         const data = res?.data;

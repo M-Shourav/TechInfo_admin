@@ -44,7 +44,7 @@ const Signup = () => {
       }
 
       const res = await axios.post(
-        `${serverUrl}secure/admin/register`,
+        `${serverUrl}/api/secure/admin/register`,
         formData
       );
       const data = res?.data;
