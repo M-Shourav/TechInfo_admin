@@ -35,7 +35,7 @@ const Sidebar = () => {
               className="inline-flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <LayoutDashboard />
-              Dashboard
+              <p className="hidden sm:inline-flex">Dashboard</p>
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -44,7 +44,7 @@ const Sidebar = () => {
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <Newspaper />
-              Post
+              <p className="hidden sm:inline-flex"> Post</p>
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -53,7 +53,7 @@ const Sidebar = () => {
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <MdAutoFixHigh />
-              Author
+              <p className="hidden sm:inline-flex">Author</p>
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -62,7 +62,7 @@ const Sidebar = () => {
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <Sparkles />
-              Admin
+              <p className="hidden sm:inline-flex">Admin</p>
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -71,7 +71,7 @@ const Sidebar = () => {
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <ChartColumnStacked />
-              Categories
+              <p className="hidden sm:inline-flex"> Categories</p>
             </Link>
           </CommandItem>
           <CommandItem className="text-base">
@@ -80,7 +80,7 @@ const Sidebar = () => {
               className="flex items-center justify-center md:justify-normal gap-3 font-semibold"
             >
               <UserPen />
-              Users
+              <p className="hidden sm:inline-flex">Users</p>
             </Link>
           </CommandItem>
         </CommandGroup>
@@ -89,17 +89,23 @@ const Sidebar = () => {
           <CommandItem>
             <User />
             <span>Profile</span>
-            <CommandShortcut>⌘P</CommandShortcut>
+            <CommandShortcut className="hidden sm:inline-flex">
+              ⌘P
+            </CommandShortcut>
           </CommandItem>
           <CommandItem>
             <CreditCard />
             <span>Billing</span>
-            <CommandShortcut>⌘B</CommandShortcut>
+            <CommandShortcut className="hidden sm:inline-flex">
+              ⌘B
+            </CommandShortcut>
           </CommandItem>
           <CommandItem>
             <Settings />
             <span>Settings</span>
-            <CommandShortcut>⌘S</CommandShortcut>
+            <CommandShortcut className="hidden sm:inline-flex">
+              ⌘S
+            </CommandShortcut>
           </CommandItem>
         </CommandGroup>
       </CommandList>
