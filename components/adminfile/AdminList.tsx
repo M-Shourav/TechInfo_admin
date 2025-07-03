@@ -1,7 +1,10 @@
 "use client";
+import { serverUrl } from "@/config/config";
+import { User } from "@/types/user";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Loading from "../Loading";
 import {
   Table,
   TableBody,
@@ -11,6 +14,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { Button } from "../ui/button";
+import { Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,43 +26,43 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Trash2 } from "lucide-react";
-import { User } from "@/types/user";
-import UpdateUser from "../UpdateUser";
-import { serverUrl } from "@/config/config";
-import Loading from "../Loading";
+import UpdateAdmin from "./UpdateAdmin";
 
-const UserList = () => {
-  const [userList, setUserList] = useState<User[]>([]);
+const AdminList = () => {
+  const [adminList, setAdminList] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const getUserList = async () => {
-    setLoading(true);
+  const getAdminList = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/user/users`, {
+      setLoading(true);
+      const res = await axios.get(`${serverUrl}/api/secure/admin/getallAdmin`, {
         withCredentials: true,
       });
-      const data = response?.data;
+
+      const data = res?.data;
       if (data?.success) {
-        setUserList(data?.user);
+        setAdminList(data?.admin);
       } else {
         toast.error(data?.message);
       }
     } catch (error) {
-      console.log("user list fetching error:", error);
+      console.log("Fetching Admin list error:", error);
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
-    getUserList();
+    getAdminList();
   }, []);
-
-  const handleRemoveUser = async (_id: string) => {
+  const handleRemoveUser = async (_id: string, isAdmin: boolean) => {
     setLoading(true);
+    if (isAdmin) {
+      toast.error("Admin can't deleted");
+      return;
+    }
     try {
       const response = await axios.post(
-        `${serverUrl}/api/user/remove/${_id}`,
+        `${serverUrl}/api/secure/admin/remove//${_id}`,
         {},
         {
           withCredentials: true,
@@ -67,22 +71,24 @@ const UserList = () => {
       const data = response?.data;
       if (data?.success) {
         toast.success(data?.message);
-        setUserList((prev) => prev?.filter((user) => user?._id !== _id));
-        await getUserList();
+        setAdminList((prev) => prev?.filter((admin) => admin?._id !== _id));
+        await getAdminList();
       } else {
         toast.error(data?.message);
       }
     } catch (error) {
-      console.error("user remove error", error);
+      console.error("admin remove error", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
+    <>
       {loading ? (
-        <Loading />
+        <div className="mt-10">
+          <Loading />
+        </div>
       ) : (
         <div>
           <Table>
@@ -98,7 +104,7 @@ const UserList = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {userList?.map((item: User) => (
+              {adminList?.map((item: User) => (
                 <TableRow key={item?._id}>
                   <TableCell className="hidden md:table-cell capitalize font-semibold">
                     {item?.name}
@@ -134,9 +140,9 @@ const UserList = () => {
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Delete User</AlertDialogTitle>
+                            <AlertDialogTitle>Delete Admin</AlertDialogTitle>
                             <AlertDialogDescription>
-                              This action will permanently remove the user from
+                              This action will permanently remove the Admin from
                               the system. Are you sure?
                             </AlertDialogDescription>
                           </AlertDialogHeader>
@@ -145,7 +151,9 @@ const UserList = () => {
                               Cancel
                             </AlertDialogCancel>
                             <AlertDialogAction
-                              onClick={() => handleRemoveUser(item?._id)}
+                              onClick={() =>
+                                handleRemoveUser(item?._id, item?.isAdmin)
+                              }
                               className=" cursor-pointer"
                             >
                               Continue
@@ -156,7 +164,7 @@ const UserList = () => {
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    <UpdateUser user={item} onUpdate={getUserList} />
+                    <UpdateAdmin admin={item} onUpdate={getAdminList} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -164,8 +172,8 @@ const UserList = () => {
           </Table>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default UserList;
+export default AdminList;

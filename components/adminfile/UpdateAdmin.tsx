@@ -1,6 +1,10 @@
 "use client";
 import { User } from "@/types/user";
 import { useState } from "react";
+import { Eye, EyeOff, LoaderCircle, Pencil } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { serverUrl } from "@/config/config";
 import {
   Dialog,
   DialogContent,
@@ -9,23 +13,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
-import { Eye, EyeOff, LoaderCircle, Pencil } from "lucide-react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { serverUrl } from "@/config/config";
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 interface Props {
-  user: User;
+  admin: User;
   onUpdate: () => void;
 }
 
-const UpdateUser = ({ user, onUpdate }: Props) => {
+const UpdateAdmin = ({ admin, onUpdate }: Props) => {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+  const [name, setName] = useState(admin.name);
+  const [email, setEmail] = useState(admin.email);
   const [currentPassword, SetCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -50,7 +50,7 @@ const UpdateUser = ({ user, onUpdate }: Props) => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `${serverUrl}/api/user/update/${user?._id}`,
+        `${serverUrl}/api/secure/admin/update/${admin?._id}`,
         {
           name,
           email,
@@ -64,7 +64,7 @@ const UpdateUser = ({ user, onUpdate }: Props) => {
       const data = res.data;
       if (data.success) {
         toast.success(data?.message);
-        onUpdate(); // refresh user list
+        onUpdate(); // refresh admin list
         setOpen(false);
       } else {
         toast.error(data.message || "Failed to update");
@@ -90,8 +90,8 @@ const UpdateUser = ({ user, onUpdate }: Props) => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit User</DialogTitle>
-          <DialogDescription>Update user's name or role.</DialogDescription>
+          <DialogTitle>Edit Admin</DialogTitle>
+          <DialogDescription>Update Admin name or role.</DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4">
@@ -168,4 +168,4 @@ const UpdateUser = ({ user, onUpdate }: Props) => {
   );
 };
 
-export default UpdateUser;
+export default UpdateAdmin;
