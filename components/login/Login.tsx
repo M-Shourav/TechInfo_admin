@@ -21,7 +21,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleLoginForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="w-full max-w-sm mx-auto flex items-center justify-center px-4 sm:px-0">
+    <div className="w-full max-w-sm mx-auto px-4 sm:px-0">
       <Tabs defaultValue="account" className="w-full">
         <TabsContent value="account">
           <Card>
