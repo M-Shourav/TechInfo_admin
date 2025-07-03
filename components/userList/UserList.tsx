@@ -118,7 +118,6 @@ const UserList = () => {
                       <Button
                         variant="destructive"
                         className="cursor-not-allowed bg-transparent text-black hover:text-black"
-                        onClick={() => toast.error("Admin can't be deleted.")}
                       >
                         <Trash2 size={18} />
                       </Button>
