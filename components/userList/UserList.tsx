@@ -114,36 +114,46 @@ const UserList = () => {
                     {item?.isAdmin ? "Admin" : "User"}
                   </TableCell>
                   <TableCell className="hidden md:flex items-center justify-center">
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          className="cursor-pointer bg-transparent text-black hover:text-white"
-                          variant={"destructive"}
-                        >
-                          <Trash2 size={18} />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Delete User</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action will permanently remove the user from
-                            the system. Are you sure?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel className="cursor-pointer">
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleRemoveUser(item?._id)}
-                            className=" cursor-pointer"
+                    {item?.isAdmin ? (
+                      <Button
+                        variant="destructive"
+                        className="cursor-not-allowed bg-transparent text-black hover:text-black"
+                        onClick={() => toast.error("Admin can't be deleted.")}
+                      >
+                        <Trash2 size={18} />
+                      </Button>
+                    ) : (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            className="cursor-pointer bg-transparent text-black hover:text-white"
+                            variant={"destructive"}
                           >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                            <Trash2 size={18} />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete User</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action will permanently remove the user from
+                              the system. Are you sure?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel className="cursor-pointer">
+                              Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleRemoveUser(item?._id)}
+                              className=" cursor-pointer"
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    )}
                   </TableCell>
                   <TableCell className="text-center">
                     <UpdateUser user={item} onUpdate={getUserList} />
