@@ -61,31 +61,33 @@ const Signup = () => {
     }
   };
   return (
-    <div className="w-full max-w-md mx-auto">
-      <Card className="p-5">
-        <CardHeader>
-          <CardTitle>Signup in to admin panel</CardTitle>
-          <CardDescription>
+    <div className="flex w-full max-w-md mx-auto flex-col gap-6 px-4 sm:px-0">
+      <Card className="px-5">
+        <CardHeader className="text-center">
+          <CardTitle className="text-xs sm:text-sm">
+            Signup in to admin panel
+          </CardTitle>
+          <CardDescription className="text-xs">
             Welcome Back! Please signup in to continue.
           </CardDescription>
         </CardHeader>
         <CardContent className="w-full p-0">
-          <form onSubmit={registerFunction} className="flex flex-col gap-3">
-            <div className="w-16 h-16 rounded-full border border-indigo-500 flex items-center justify-center relative">
+          <form onSubmit={registerFunction}>
+            <div className="w-10 h-10 rounded-full border border-indigo-500 flex items-center justify-center relative">
               <Label htmlFor="imageUrl">
                 {imageUrl ? (
                   <>
                     <Image
                       src={URL.createObjectURL(imageUrl)}
                       alt="profile-image"
-                      width={16}
-                      height={16}
+                      width={10}
+                      height={10}
                       priority
-                      className="w-16 h-16 object-cover rounded-full cursor-pointer"
+                      className="w-10 h-10 object-cover rounded-full cursor-pointer"
                     />
                   </>
                 ) : (
-                  <CameraOff size={45} className="cursor-pointer" />
+                  <CameraOff size={22} className="cursor-pointer" />
                 )}
                 <Input
                   type="file"
@@ -101,8 +103,8 @@ const Signup = () => {
                 />
               </Label>
             </div>
-            <div className="flex flex-col gap-y-2">
-              <label htmlFor="name" className="font-semibold text-[13px]">
+            <div>
+              <label htmlFor="name" className="font-semibold text-xs">
                 Name
               </label>
               <input
@@ -114,12 +116,15 @@ const Signup = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border outline-none h-10 px-4 rounded-md
-           focus:border-blue-600 placeholder:text-[13px]"
+                disabled={loading}
+                className={`w-full border outline-none h-10 px-4 rounded-md
+           focus:border-blue-600 placeholder:text-[13px] ${
+             loading ? "cursor-not-allowed" : ""
+           }`}
               />
             </div>
-            <div className="flex flex-col gap-y-2">
-              <label htmlFor="email" className="font-semibold text-[13px]">
+            <div>
+              <label htmlFor="email" className="font-semibold text-xs">
                 Email
               </label>
               <input
@@ -131,12 +136,15 @@ const Signup = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border outline-none h-10 px-4 rounded-md
-            focus:border-blue-600 placeholder:text-[13px]"
+                disabled={loading}
+                className={`w-full border outline-none h-10 px-4 rounded-md
+            focus:border-blue-600 placeholder:text-[13px] ${
+              loading ? "cursor-not-allowed" : ""
+            }`}
               />
             </div>
-            <div className="flex flex-col gap-y-2 relative">
-              <label htmlFor="password" className="font-semibold text-[13px]">
+            <div className="relative">
+              <label htmlFor="password" className="font-semibold text-xs">
                 Password
               </label>
               <input
@@ -148,8 +156,11 @@ const Signup = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border outline-none h-10 px-4 rounded-md
-            focus:border-blue-600 placeholder:text-[13px]"
+                disabled={loading}
+                className={`w-full border outline-none h-10 px-4 rounded-md
+            focus:border-blue-600 placeholder:text-[13px] ${
+              loading ? "cursor-not-allowed" : ""
+            }`}
               />
               {password && (
                 <span
@@ -161,19 +172,25 @@ const Signup = () => {
               )}
             </div>
             <div className="flex items-center gap-x-2 my-4">
-              <Label htmlFor="isAdmin">isAdmin</Label>
+              <Label htmlFor="isAdmin" className="text-xs">
+                isAdmin
+              </Label>
               <Switch
                 id="isAdmin"
                 name="isAdmin"
-                className=" cursor-pointer"
+                className={`cursor-pointer ${
+                  loading ? "cursor-not-allowed" : ""
+                }`}
                 checked={isAdmin}
                 onCheckedChange={() => setIsAdmin(!isAdmin)}
+                disabled={loading}
               />
             </div>
             <Button
               type="submit"
               disabled={loading}
-              className=" cursor-pointer"
+              size="icon"
+              className=" cursor-pointer text-xs w-full"
             >
               {loading ? (
                 <div className="flex items-center gap-x-1">

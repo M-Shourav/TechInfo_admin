@@ -28,7 +28,7 @@ const Sidebar = () => {
       <CommandInput placeholder="Type a command or search..." />
       <CommandList className="scroll">
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
+        <CommandGroup heading="Suggestions" className="text-[8px]">
           <CommandItem className="text-base">
             <Link
               href={"/"}
@@ -88,21 +88,21 @@ const Sidebar = () => {
         <CommandGroup heading="Settings">
           <CommandItem>
             <User />
-            <span>Profile</span>
+            <span className="hidden sm:inline-flex">Profile</span>
             <CommandShortcut className="hidden sm:inline-flex">
               ⌘P
             </CommandShortcut>
           </CommandItem>
           <CommandItem>
             <CreditCard />
-            <span>Billing</span>
+            <span className="hidden sm:inline-flex">Billing</span>
             <CommandShortcut className="hidden sm:inline-flex">
               ⌘B
             </CommandShortcut>
           </CommandItem>
           <CommandItem>
             <Settings />
-            <span>Settings</span>
+            <span className="hidden sm:inline-flex">Settings</span>
             <CommandShortcut className="hidden sm:inline-flex">
               ⌘S
             </CommandShortcut>

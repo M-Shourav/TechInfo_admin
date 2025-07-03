@@ -21,7 +21,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleLoginForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,8 +54,8 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="w-full max-w-md mx-auto">
-      <Tabs defaultValue="account" className="w-[400px]">
+    <div className="w-full max-w-sm mx-auto flex items-center justify-center px-4 sm:px-0">
+      <Tabs defaultValue="account" className="w-full">
         <TabsContent value="account">
           <Card>
             <CardHeader>
@@ -77,6 +77,7 @@ const LoginPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading}
+                    className={`${loading && "cursor-not-allowed"}`}
                   />
                 </div>
                 <div className="space-y-2 relative">
@@ -90,6 +91,7 @@ const LoginPage = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading}
+                    className={`${loading && "cursor-not-allowed"}`}
                   />
                   <span
                     onClick={() => setShowPassword(!showPassword)}
