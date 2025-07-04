@@ -59,9 +59,6 @@ const Profile = () => {
         `${serverUrl}api/secure/admin/update/${adminData?._id}`,
         formData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
           withCredentials: true,
         }
       );
