@@ -33,6 +33,7 @@ const Profile = () => {
         const data = res?.data;
         if (data?.success) {
           setAdminData(data?.admin);
+          setName(data?.admin.name);
         }
       } catch (err) {
         console.log("Error loading admin:", err);
@@ -53,12 +54,9 @@ const Profile = () => {
       }
       const res = await axios.put(
         `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
-        {
-          name,
-        },
+        name,
         {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
