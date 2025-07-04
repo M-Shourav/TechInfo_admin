@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-full h-full fixed top-0">
+    <div className="w-full h-full ">
       <Navbar />
       <div className="w-full flex">
         <div className="w-[18%] min-h-screen border-r border-r-gray-300">
