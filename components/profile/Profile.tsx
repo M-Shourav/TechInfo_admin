@@ -46,10 +46,14 @@ const Profile = () => {
     e.preventDefault();
     try {
       setLoading(true);
+      if (!adminData?._id) {
+        console.error("Admin ID not found");
+        return;
+      }
       const formData = new FormData();
       formData.append("name", name);
       const res = await axios.put(
-        `${serverUrl}/api/secure/admin/update`,
+        `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
         formData,
         {
           withCredentials: true,
