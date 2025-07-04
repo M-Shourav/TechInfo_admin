@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 
 const Profile = () => {
   const [adminData, setAdminData] = useState<AdminType | null>(null);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(adminData?.name);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,6 @@ const Profile = () => {
         const data = res?.data;
         if (data?.success) {
           setAdminData(data?.admin);
-          setName(data?.admin.name);
         }
       } catch (err) {
         console.log("Error loading admin:", err);
