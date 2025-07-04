@@ -16,6 +16,7 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const [adminData, setAdminData] = useState<AdminType | null>(null);
@@ -29,9 +30,10 @@ const Profile = () => {
         const res = await axios.get(`${serverUrl}/api/secure/admin/me`, {
           withCredentials: true,
         });
-        if (res.data?.success) {
-          setAdminData(res.data.admin);
-          setName(res.data.admin.name);
+        const data = res?.data;
+        if (data?.success) {
+          setAdminData(data?.admin);
+          setName(data?.admin.name);
         }
       } catch (err) {
         console.log("Error loading admin:", err);
@@ -61,9 +63,12 @@ const Profile = () => {
         }
       );
 
-      if (res.data.success) {
-        alert("Profile updated!");
-        setAdminData(res.data.admin);
+      const data = res?.data;
+      if (data?.success) {
+        setAdminData(data?.admin);
+        toast.success(data?.message);
+      } else {
+        toast.error(data?.message);
       }
     } catch (err) {
       console.log("Update error:", err);
@@ -84,14 +89,14 @@ const Profile = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleUpdate}>
-            <div className="w-20 h-20 flex items-center justify-center rounded-full">
+            <div className="w-16 h-16 flex items-center justify-center rounded-full">
               {adminData?.adminAvatar && (
                 <Image
                   src={adminData?.adminAvatar?.url}
                   alt="profile-image"
-                  width={50}
-                  height={50}
-                  className="w-20 h-20 object-cover rounded-full"
+                  width={16}
+                  height={16}
+                  className="w-16 h-16 object-cover rounded-full"
                 />
               )}
             </div>
