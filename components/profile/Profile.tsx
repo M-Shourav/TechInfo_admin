@@ -52,11 +52,9 @@ const Profile = () => {
         console.error("Admin ID not found");
         return;
       }
-      const formData = new FormData();
-      formData.append("name", name);
       const res = await axios.put(
         `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
-        formData,
+        name,
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
