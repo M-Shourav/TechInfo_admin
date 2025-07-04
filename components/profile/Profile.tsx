@@ -54,7 +54,9 @@ const Profile = () => {
       }
       const res = await axios.put(
         `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
-        name,
+        {
+          name,
+        },
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
