@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 
 const Profile = () => {
   const [adminData, setAdminData] = useState<AdminType | null>(null);
-  const [name, setName] = useState(adminData?.name);
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -52,10 +52,16 @@ const Profile = () => {
         console.error("Admin ID not found");
         return;
       }
+      const formData = new FormData();
+      formData.append("name", name);
+
       const res = await axios.put(
-        `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
-        name,
+        `${serverUrl}api/secure/admin/update/${adminData?._id}`,
+        formData,
         {
+          headers: {
+            "Content-Type": "application/json",
+          },
           withCredentials: true,
         }
       );
