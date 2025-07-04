@@ -56,7 +56,7 @@ const Profile = () => {
       formData.append("name", name);
 
       const res = await axios.put(
-        `${serverUrl}api/secure/admin/update/${adminData?._id}`,
+        `${serverUrl}/api/secure/admin/update/${adminData?._id}`,
         formData,
         {
           withCredentials: true,
