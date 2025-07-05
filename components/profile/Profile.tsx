@@ -108,8 +108,8 @@ const Profile = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={`mb-4 ${loading ? "cursor-not-allowed" : ""}`}
-                disabled={loading}
+                className="mb-4"
+                disabled
                 readOnly
               />
             </div>
