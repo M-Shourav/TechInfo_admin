@@ -119,7 +119,7 @@ const PostListTable = () => {
                   {post?.title}
                 </TableCell>
                 <TableCell className="hidden md:table-cell lowercase font-semibold text-xs md:text-sm">
-                  {post?.author.name}
+                  {post?.author?.name}
                 </TableCell>
                 <TableCell className="text-center hidden md:table-cell">
                   <AlertDialog>
